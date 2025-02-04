@@ -104,3 +104,39 @@ footer {
     bottom: 0;
     width: 100%;
 }
+.filtros {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filtros button {
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+}
+
+.filtros button:hover {
+    background-color: #ddd;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.projeto {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.projeto img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
