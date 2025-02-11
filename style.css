@@ -43,16 +43,20 @@ header nav ul li a {
     position: relative;
     width: 100%;
     overflow: hidden;
+    height: 600px; /* Defina uma altura fixa para o carrossel */
 }
 
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    height: 100%; /* Garante que o contêiner das imagens ocupe toda a altura do carrossel */
 }
 
 .slides img {
     width: 100%;
-    height: auto;
+    height: 100%; /* Faz as imagens ocuparem toda a altura do contêiner */
+    object-fit: cover; /* Mantém a proporção da imagem sem distorcer */
+    flex-shrink: 0; /* Impede que as imagens sejam comprimidas */
 }
 
 .apresentacao, .localizacao, .galeria, .projeto-detalhe {
