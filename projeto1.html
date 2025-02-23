@@ -33,14 +33,25 @@
         <h2>Equipe:</h2>
         <p>Equipe: Richard Lins Nogueira (Arquiteto Responsável);.</p>
         <p>Equipe: Ary Ney Chaicoski Junior (Arquiteto Responsável);.</p>
-        <div class="imagens-adicionais">
-            <img src="imagens/projeto1a.jpg" alt="Projeto 1 - Imagem A">
-            <img src="imagens/projeto1b.jpg" alt="Projeto 1 - Imagem B">
-            <img src="imagens/projeto1c.jpg" alt="Projeto 1 - Imagem C">
-            <img src="imagens/projeto1d.jpg" alt="Projeto 1 - Imagem D">
-            <img src="imagens/projeto1e.jpg" alt="Projeto 1 - Imagem E">
+        
+        <div class="galeria-projeto">
+            <div class="galeria-grid">
+                <img src="imagens/projeto1a.jpg" alt="Projeto 1 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto1b.jpg" alt="Projeto 1 - Imagem B" class="galeria-item">
+                <img src="imagens/projeto1c.jpg" alt="Projeto 1 - Imagem C" class="galeria-item">
+                <img src="imagens/projeto1d.jpg" alt="Projeto 1 - Imagem D" class="galeria-item">
+                <img src="imagens/projeto1e.jpg" alt="Projeto 1 - Imagem E" class="galeria-item">
+            </div>
         </div>
     </section>
+
+    <!-- Modal para a galeria -->
+    <div class="modal">
+        <span class="modal-fechar">&times;</span>
+        <button class="modal-nav modal-anterior">❮</button>
+        <button class="modal-nav modal-proximo">❯</button>
+        <img class="modal-conteudo" src="" alt="Imagem em tamanho grande">
+    </div>
 
     <section class="localizacao">
         <h2>Localização do Projeto</h2>
@@ -50,5 +61,51 @@
     <footer>
         <p>&copy; 2025 RL Arquitetura. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Galeria com pop-up
+        const modal = document.querySelector('.modal');
+        const modalImg = document.querySelector('.modal-conteudo');
+        const galeriaItens = document.querySelectorAll('.galeria-item');
+        const btnFechar = document.querySelector('.modal-fechar');
+        const btnAnterior = document.querySelector('.modal-anterior');
+        const btnProximo = document.querySelector('.modal-proximo');
+        let imagemAtual = 0;
+
+        // Abrir modal
+        galeriaItens.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImg.src = item.src;
+                imagemAtual = index;
+            });
+        });
+
+        // Fechar modal
+        btnFechar.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Navegação
+        btnAnterior.addEventListener('click', () => {
+            imagemAtual = (imagemAtual - 1 + galeriaItens.length) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        btnProximo.addEventListener('click', () => {
+            imagemAtual = (imagemAtual + 1) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        // Navegação com teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') btnAnterior.click();
+                if (e.key === 'ArrowRight') btnProximo.click();
+                if (e.key === 'Escape') btnFechar.click();
+            }
+        });
+    </script>
 </body>
 </html>
