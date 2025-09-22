@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Bozza - RL Arquitetura</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="imagens/logo.jpg" alt="Logo RL Arquitetura">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="projeto-detalhe">
+        <h2>Casa Bozza</h2>
+        <p class="data">Data: 01/03/2021</p>
+        <img src="imagens/projeto5.jpg" alt="Projeto 3" class="imagem-principal">
+        <h2>Serviços prestados:</h2>
+        <p>Projeto hidrossanitário; Coordenação e compatibilização de projetos</p>
+        <h2>Conceito:</h2>
+        <p>Projeto de habitação unifamiliar em Curitiba. Os serviços incluiam projetos complementares de elétrica e hidrossanitário, além da coordenação e compatibilização de projetos. O processo de coordenação e compatibilização foi baseado em fluxo BIM, fazendo uso de CDE, modelo IFC e relatório BCF.</p>
+        <h2>Equipe:</h2>
+        <p>Richard Lins Nogueira (Arquiteto Responsável);.</p>
+        <p>Ary Ney Chaicoski Junior (Arquiteto Responsável);.</p>
+        
+        <div class="galeria-projeto">
+            <div class="galeria-grid">
+                <img src="imagens/projeto5.jpg" alt="Projeto 1 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto5a.jpg" alt="Projeto 1 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto5b.jpg" alt="Projeto 1 - Imagem A" class="galeria-item">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para a galeria -->
+    <div class="modal">
+        <span class="modal-fechar">&times;</span>
+        <button class="modal-nav modal-anterior">❮</button>
+        <button class="modal-nav modal-proximo">❯</button>
+        <img class="modal-conteudo" src="" alt="Imagem em tamanho grande">
+    </div>
+
+    <section class="localizacao">
+        <h2>Localização do Projeto</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1218.3332053496158!2d-49.26284774867845!3d-25.384479208950662!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce6ea3c205bd1%3A0x2bcf7bb65619f085!2sRua%20Jacob%20Biron%2C%2059%20-%20S%C3%A3o%20Louren%C3%A7o%2C%20Curitiba%20-%20PR%2C%2082210-160!5e1!3m2!1spt-BR!2sbr!4v1758545333068!5m2!1spt-BR!2sbr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 RL Arquitetura. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Galeria com pop-up
+        const modal = document.querySelector('.modal');
+        const modalImg = document.querySelector('.modal-conteudo');
+        const galeriaItens = document.querySelectorAll('.galeria-item');
+        const btnFechar = document.querySelector('.modal-fechar');
+        const btnAnterior = document.querySelector('.modal-anterior');
+        const btnProximo = document.querySelector('.modal-proximo');
+        let imagemAtual = 0;
+
+        // Abrir modal
+        galeriaItens.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImg.src = item.src;
+                imagemAtual = index;
+            });
+        });
+
+        // Fechar modal
+        btnFechar.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Navegação
+        btnAnterior.addEventListener('click', () => {
+            imagemAtual = (imagemAtual - 1 + galeriaItens.length) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        btnProximo.addEventListener('click', () => {
+            imagemAtual = (imagemAtual + 1) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        // Navegação com teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') btnAnterior.click();
+                if (e.key === 'ArrowRight') btnProximo.click();
+                if (e.key === 'Escape') btnFechar.click();
+            }
+        });
+    </script>
+</body>
+</html>
