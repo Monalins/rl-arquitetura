@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blentt - RL Arquitetura</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="imagens/logo.jpg" alt="Logo RL Arquitetura">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="projeto-detalhe">
+        <h2>Blentt</h2>
+        <p class="data">Data: 01/03/2021</p>
+        <img src="imagens/projeto8.jpg" alt="Projeto 8" class="imagem-principal">
+        <h2>Serviços prestados:</h2>
+        <p>Projeto de Arquitetura</p>
+        <h2>Conceito:</h2>
+        <p> Projeto de edificio residencial de padrão misto, com Stúdios, apartamentos 2QS e 3QS. A proposta estética faz partido do formato "piramidal" proveniente do escalonamento exigido pelo afastamento lateral para trabalhar os diferentes volumes em diferentes cores. Essas cores são também utilizadas para destacar os cubos que demarcam as sacadas na fachada principal. Projeto desenvolvido com tecnologia BIM e fluxo colaborativo em plataforma BCF.</p>
+        <h2>Equipe:</h2>
+        <p>Richard Lins Nogueira (Gerente de projetos / Arquiteto);.</p>
+        <p>Ingridy Pegoraro (Projetista de arquitetura);.</p>
+        <p>Thiago Pinheiro (Arquiteto Responsável);.</p>
+        <p>Juliano Nowak (Arquiteto Responsável);.</p>
+        
+        <div class="galeria-projeto">
+            <div class="galeria-grid">
+                <img src="imagens/projeto8.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto8a.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto8b.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto8c.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto8d.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+                <img src="imagens/projeto8e.jpg" alt="Projeto 8 - Imagem A" class="galeria-item">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para a galeria -->
+    <div class="modal">
+        <span class="modal-fechar">&times;</span>
+        <button class="modal-nav modal-anterior">❮</button>
+        <button class="modal-nav modal-proximo">❯</button>
+        <img class="modal-conteudo" src="" alt="Imagem em tamanho grande">
+    </div>
+
+    <footer>
+        <p>&copy; 2025 RL Arquitetura. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Galeria com pop-up
+        const modal = document.querySelector('.modal');
+        const modalImg = document.querySelector('.modal-conteudo');
+        const galeriaItens = document.querySelectorAll('.galeria-item');
+        const btnFechar = document.querySelector('.modal-fechar');
+        const btnAnterior = document.querySelector('.modal-anterior');
+        const btnProximo = document.querySelector('.modal-proximo');
+        let imagemAtual = 0;
+
+        // Abrir modal
+        galeriaItens.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImg.src = item.src;
+                imagemAtual = index;
+            });
+        });
+
+        // Fechar modal
+        btnFechar.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Navegação
+        btnAnterior.addEventListener('click', () => {
+            imagemAtual = (imagemAtual - 1 + galeriaItens.length) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        btnProximo.addEventListener('click', () => {
+            imagemAtual = (imagemAtual + 1) % galeriaItens.length;
+            modalImg.src = galeriaItens[imagemAtual].src;
+        });
+
+        // Navegação com teclado
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') btnAnterior.click();
+                if (e.key === 'ArrowRight') btnProximo.click();
+                if (e.key === 'Escape') btnFechar.click();
+            }
+        });
+    </script>
+</body>
+</html>
